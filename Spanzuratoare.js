@@ -17,7 +17,7 @@ function onReset () {
     maxwrong = 6;
     wrong.innerHTML = '';
     picture.querySelectorAll("[id]")
-        .forEach(x => x.style.display = "none");
+           .forEach(x => x.style.display = "none");
     word = chooseWord();
     drowWord(word);
     document.getElementById("text").innerHTML = "";
@@ -25,7 +25,7 @@ function onReset () {
 
 function chooseWord () {
     let words = ['incorporat', 'telescop', 'termopan', 'calatorie', 'masina', 'razboi']
-    let rdm = generateNumber(0, words.length - 1);
+    let rdm = generateNumber(0, words.length);
     return words[rdm];
 }
 
@@ -44,11 +44,11 @@ function drowWord () {
 }
 
 function generateNumber (minValue, maxValue) {
-    return Math.ceil(minValue + Math.random() *maxValue - minValue);
+    return Math.floor(Math.random() * (maxValue - minValue) + minValue);
 }
 
 function onKeyUp (tast) {
-    if (tast.keyCode < 65 || tast.keyCode > 90) {
+    if (tast.keyCode < 65 || tast.keyCode > 90 || getEmptySlots().length == 0 || maxwrong <= 0) {
         return;
     }
     let letter = tast.key;
